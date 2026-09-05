@@ -1,4 +1,4 @@
-# Sistem Pendukung Keputusan Kelulusan Pelatihan
+# SIMPEL — Sistem Informasi Pendukung Kelulusan
 
 Sistem ini dibangun menggunakan Laravel untuk membantu menentukan kelulusan peserta pelatihan berdasarkan beberapa kriteria, seperti nilai pretest, nilai posttest, nilai praktik, dan kehadiran. Metode yang digunakan dalam pengambilan keputusan adalah **Weighted Product (WP)**.
 
@@ -24,13 +24,13 @@ Ikuti langkah-langkah berikut untuk menjalankan project ini secara lokal:
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/M-Surya-S/PenentuKelulusan.git
+git clone https://github.com/M-Surya-S/SIMPEL.git
 ```
 
 ### 2. Pindah Ke Folder Project
 
 ```bash
-cd PenentuKelulusan
+cd SIMPEL
 ```
 
 ### 3. Install Dependensi
@@ -54,7 +54,7 @@ Edit file .env dan sesuaikan dengan pengaturan database lokal Anda:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=nama_database
+DB_DATABASE=simpel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -87,4 +87,4 @@ Akses aplikasi melalui: http://localhost:8000
 - Aplikasi ini menggunakan metode WP untuk perhitungan skor akhir secara otomatis.
 
 
-© 2025 - Sistem Pendukung Keputusan Kelulusan Pelatihan
+© 2025 - SIMPEL (Sistem Informasi Pendukung Kelulusan)
