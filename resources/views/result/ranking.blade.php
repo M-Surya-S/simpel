@@ -149,22 +149,25 @@
     <!-- Modals untuk Detail -->
     @foreach ($alternatif_lulus->merge($alternatif_tidak_lulus) as $a)
     <dialog id="modal_detail_{{ $a->id }}" class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-lg text-primary-content mb-4 border-b pb-2">Detail Nilai - {{ $a->name }}</h3>
+        <div class="modal-box w-11/12 max-w-2xl">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="font-bold text-lg mb-4">Detail Nilai - {{ $a->name }}</h3>
             
             <div class="overflow-x-auto">
-                <table class="table table-sm table-zebra w-full">
+                <table class="table table-zebra w-full">
                     <thead>
                         <tr>
-                            <th class="text-base-content/70">Kriteria</th>
-                            <th class="text-base-content/70">Keterangan</th>
-                            <th class="text-base-content/70 text-center">Rate</th>
+                            <th>Kriteria</th>
+                            <th>Keterangan</th>
+                            <th class="text-center">Rate</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($a->skor_alternatif as $skor)
                         <tr>
-                            <td class="font-medium">{{ $skor->kriteria->kriteria }}</td>
+                            <td>{{ $skor->kriteria->kriteria }}</td>
                             <td>{{ $skor->sub_kriteria->desc ?? '-' }}</td>
                             <td class="text-center">
                                 <span class="badge badge-sm font-semibold {{ ($skor->sub_kriteria->rate ?? 0) < 2 ? 'badge-error' : 'badge-ghost' }}">
@@ -177,25 +180,18 @@
                 </table>
             </div>
 
-            <div class="mt-6 flex justify-between items-center bg-base-200/50 p-4 rounded-xl border border-base-300">
-                <span class="font-bold text-base-content">Skor Akhir WP (Vektor V)</span>
+            <div class="mt-6 flex justify-between items-center bg-base-200 p-4 rounded-xl">
+                <span class="font-bold">Skor Akhir WP (Vektor V)</span>
                 <span class="font-mono font-bold text-lg text-primary">{{ number_format($vektor_v[$a->id] ?? 0, 4) }}</span>
             </div>
-
+            
             <div class="modal-action">
                 <form method="dialog">
-                    <button class="btn btn-sm btn-ghost">Tutup</button>
+                    <button class="btn">Tutup</button>
                 </form>
             </div>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
     </dialog>
     @endforeach
 
 @endsection
-
-
-
-
