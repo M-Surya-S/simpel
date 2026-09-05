@@ -3,126 +3,97 @@
 @section('title', 'Table Matrix')
 
 @section('main')
-    <main class="main-content position-relative border-radius-lg ">
-        <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
-            data-scroll="false">
-            <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('home') }}">Home</a>
-                        </li>
-                    </ol>
-                    <h4 class="font-weight-bolder text-white mb-0">Table Matrix</h4>
-                </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    </div>
-                    <ul class="navbar-nav  justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link text-white font-weight-bold px-0">
-                                <span class="d-sm-inline d-none">SCPK Kelompok Konversi</span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                </div>
-                            </a>
-                        </li>
+    <!-- Page Header -->
+    <div class="px-6 py-6 pb-2">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="text-sm breadcrumbs text-primary-content/70 mb-1">
+                    <ul>
+                        <li><a href="{{ route('home') }}" class="breadcrumb-link"><i class="fa fa-home text-xs"></i></a></li>
+                        <li>Table Matrix</li>
                     </ul>
                 </div>
+                <h1 class="text-2xl font-bold text-primary-content">Table Matrix</h1>
             </div>
-        </nav>
-        <!-- End Navbar -->
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header pb-0">
-                        </div>
-                        <div class="card-body px-0 pt-0 pb-3">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                No</th>
-                                            <th
-                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                Nama Peserta</th>
-                                            @foreach ($kriteria as $k)
-                                                <th
-                                                    class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                    C{{ $loop->iteration }}</th>
-                                            @endforeach
-                                            <th
-                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                Vektor S</th>
-                                            <th
-                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                Vektor V</th>
-                                            <th
-                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($alternatif as $a)
-                                            <tr>
-                                                <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-2 mt-2">
-                                                        {{ $loop->iteration }}.
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ $a->name }}</p>
-                                                </td>
-                                                @foreach ($kriteria as $k)
-                                                    @php
-                                                        $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
-                                                    @endphp
-                                                    <td class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ $skor ? $skor->sub_kriteria->rate : '-' }}
-                                                    </td>
-                                                @endforeach
-                                                <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ number_format($vektor_s[$a->id] ?? 0, 3) }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ number_format($vektor_v[$a->id] ?? 0, 3) }}
-                                                    </p>
-                                                </td>
-                                                <td class="text-center">
-                                                    @if ($a->status === 'Lulus')
-                                                        <span class="badge bg-success">{{ $a->status }}</span>
-                                                    @else
-                                                        <span class="badge bg-danger">{{ $a->status }}</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="{{ $jumlah_kriteria + 4 }}"
-                                                    class="text-center text-muted pb-3 pt-3">Belum ada data
-                                                    matrix.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+            <div class="flex items-center gap-2">
+                <label for="sidebar-drawer" class="btn btn-ghost btn-sm text-primary-content lg:hidden">
+                    <i class="fa fa-bars"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 flex-1">
+        <div class="card bg-base-100 shadow-md rounded-2xl">
+            <div class="card-body p-0">
+                <div class="px-5 pt-5 pb-3">
+                    <h3 class="text-base font-bold text-base-content flex items-center gap-2">
+                        <i class="fa fa-table-cells text-primary text-sm"></i>
+                        Matriks Keputusan
+                    </h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra table-sm">
+                        <thead>
+                            <tr>
+                                <th class="text-center text-xs font-bold uppercase text-base-content/50">No</th>
+                                <th class="text-center text-xs font-bold uppercase text-base-content/50">Nama Peserta</th>
+                                @foreach ($kriteria as $k)
+                                    <th class="text-center text-xs font-bold uppercase text-base-content/50">C{{ $loop->iteration }}</th>
+                                @endforeach
+                                <th class="text-center text-xs font-bold uppercase text-base-content/50">Vektor S</th>
+                                <th class="text-center text-xs font-bold uppercase text-base-content/50">Vektor V</th>
+                                <th class="text-center text-xs font-bold uppercase text-base-content/50">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($alternatif as $a)
+                                <tr class="hover">
+                                    <td class="text-center font-semibold text-sm">{{ $loop->iteration }}.</td>
+                                    <td class="text-center font-semibold text-sm">{{ $a->name }}</td>
+                                    @foreach ($kriteria as $k)
+                                        @php
+                                            $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
+                                        @endphp
+                                        <td class="text-center font-mono text-sm">{{ $skor ? $skor->sub_kriteria->rate : '-' }}</td>
+                                    @endforeach
+                                    <td class="text-center font-mono text-sm font-semibold">
+                                        {{ number_format($vektor_s[$a->id] ?? 0, 3) }}
+                                    </td>
+                                    <td class="text-center font-mono text-sm font-semibold">
+                                        {{ number_format($vektor_v[$a->id] ?? 0, 3) }}
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($a->status === 'Lulus')
+                                            <span class="badge badge-success badge-sm gap-1 font-semibold">
+                                                <i class="fa fa-check text-[10px]"></i>
+                                                {{ $a->status }}
+                                            </span>
+                                        @else
+                                            <span class="badge badge-error badge-sm gap-1 font-semibold">
+                                                <i class="fa fa-xmark text-[10px]"></i>
+                                                {{ $a->status }}
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="{{ $jumlah_kriteria + 5 }}" class="text-center text-base-content/50 py-8">
+                                        <i class="fa fa-inbox text-3xl mb-2 block"></i>
+                                        Belum ada data matrix.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 @endsection
+
+
+
+

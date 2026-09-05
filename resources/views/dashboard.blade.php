@@ -2,163 +2,118 @@
 
 @section('title', 'Dashboard')
 
-@push('style')
-    <!-- CSS Libraries -->
-@endpush
-
 @section('main')
-    <main class="main-content position-relative border-radius-lg ">
-        <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
-            data-scroll="false">
-            <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm opacity-5 text-white" aria-current="page">Home</li>
-                    </ol>
-                    <h4 class="font-weight-bolder text-white mb-0">Dashboard</h4>
-                </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    </div>
-                    <ul class="navbar-nav  justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link text-white font-weight-bold px-0">
-                                <span class="d-sm-inline d-none">SCPK Kelompok Konversi</span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Page Header -->
+    <div class="px-6 py-6 pb-2">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-base-content flex items-center gap-2">
+                    <i class="fa fa-tv text-primary"></i>
+                    Dashboard
+                </h1>
             </div>
-        </nav>
-        <!-- End Navbar -->
+            <div class="flex items-center gap-2">
+                <label for="sidebar-drawer" class="btn btn-ghost btn-sm text-base-content lg:hidden">
+                    <i class="fa fa-bars"></i>
+                </label>
+            </div>
+        </div>
+    </div>
 
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-2 text-uppercase font-weight-bold">Jumlah Alternatif</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            {{ $jumlah_alternatif }}
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="fa fa-users text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Content -->
+    <div class="p-6 flex-1">
+        <!-- Stat Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+            <!-- Jumlah Alternatif -->
+            <div class="card bg-base-100 shadow-md card-hover rounded-2xl">
+                <div class="card-body p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold text-base-content mb-1">{{ $jumlah_alternatif }}</h2>
+                            <p class="text-[11px] font-semibold uppercase tracking-wider text-base-content/50">Jumlah Alternatif</p>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-2 text-uppercase font-weight-bold">Jumlah Kriteria</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            {{ $jumlah_kriteria }}
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                        <i class="fa fa-chart-bar text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-2 text-uppercase font-weight-bold">Jumlah Sub Kriteria</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            {{ $jumlah_sub_kriteria }}
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                        <i class="fa fa-chart-line text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                            <i class="fa fa-users text-primary text-xl"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-lg-7 mb-lg-0 mb-4">
-                    <div class="card ">
-                        <div class="card-header pb-0 p-3">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-2">Peringkat</h6>
-                            </div>
+
+            <!-- Jumlah Kriteria -->
+            <div class="card bg-base-100 shadow-md card-hover rounded-2xl">
+                <div class="card-body p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold text-base-content mb-1">{{ $jumlah_kriteria }}</h2>
+                            <p class="text-[11px] font-semibold uppercase tracking-wider text-base-content/50">Jumlah Kriteria</p>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table align-items-center ">
+                        <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
+                            <i class="fa fa-chart-bar text-secondary text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jumlah Sub Kriteria -->
+            <div class="card bg-base-100 shadow-md card-hover rounded-2xl">
+                <div class="card-body p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold text-base-content mb-1">{{ $jumlah_sub_kriteria }}</h2>
+                            <p class="text-[11px] font-semibold uppercase tracking-wider text-base-content/50">Jumlah Sub Kriteria</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                            <i class="fa fa-chart-line text-accent text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-7 gap-5">
+            <!-- Peringkat Table -->
+            <div class="lg:col-span-4">
+                <div class="card bg-base-100 shadow-md rounded-2xl">
+                    <div class="card-body p-0">
+                        <div class="px-6 pt-6 pb-4">
+                            <h3 class="text-base font-bold text-base-content flex items-center gap-2">
+                                Peringkat
+                            </h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra">
+                                <thead>
+                                    <tr>
+                                        <th class="text-xs font-bold uppercase text-base-content/50">#</th>
+                                        <th class="text-xs font-bold uppercase text-base-content/50">Nama Peserta</th>
+                                        <th class="text-center text-xs font-bold uppercase text-base-content/50">Skor</th>
+                                        <th class="text-center text-xs font-bold uppercase text-base-content/50">Status</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     @foreach ($sorted_alternatif as $a)
-                                        <tr>
-                                            <td class="w-30">
-                                                <div class="d-flex px-2 py-1 align-items-center">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-sm mb-0">{{ $loop->iteration }}.</h6>
-                                                    </div>
-                                                    <div class="ms-5">
-                                                        <p class="text-xs font-weight-bold mb-0">Nama Peserta:</p>
-                                                        <h6 class="text-sm mb-0">{{ $a->name }}</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                        <tr class="hover">
+                                            <td class="font-semibold text-base-content/60">{{ $loop->iteration }}</td>
                                             <td>
-                                                <div class="text-center">
-                                                    <p class="text-xs font-weight-bold mb-0">Skor:</p>
-                                                    <h6 class="text-sm mb-0">
-                                                        {{ number_format($vektor_v[$a->id] ?? 0, 3) }}</h6>
-                                                </div>
+                                                <div class="font-semibold text-sm">{{ $a->name }}</div>
                                             </td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <p class="text-xs font-weight-bold mb-0">Status:</p>
-                                                    @if ($a->status === 'Lulus')
-                                                        <span class="badge bg-success">{{ $a->status }}</span>
-                                                    @else
-                                                        <span class="badge bg-danger">{{ $a->status }}</span>
-                                                    @endif
-                                                </div>
+                                            <td class="text-center">
+                                                <span class="font-mono font-semibold text-sm">{{ number_format($vektor_v[$a->id] ?? 0, 3) }}</span>
                                             </td>
-                                            {{-- <td class="text-center">
+                                            <td class="text-center">
                                                 @if ($a->status === 'Lulus')
-                                                    <span class="badge bg-success">{{ $a->status }}</span>
+                                                    <span class="badge badge-success badge-sm gap-1 font-semibold">
+                                                        <i class="fa fa-check text-[10px]"></i>
+                                                        {{ $a->status }}
+                                                    </span>
                                                 @else
-                                                    <span class="badge bg-danger">{{ $a->status }}</span>
+                                                    <span class="badge badge-error badge-sm gap-1 font-semibold">
+                                                        <i class="fa fa-xmark text-[10px]"></i>
+                                                        {{ $a->status }}
+                                                    </span>
                                                 @endif
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -166,38 +121,38 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="card">
-                        <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0">Kriteria Kelulusan Pelatihan</h6>
-                        </div>
-                        <div class="card-body p-3">
-                            <ul class="list-group">
-                                @foreach ($kriteria_bobot as $kriteria)
-                                    @php
-                                        $sub_kriteria = App\Models\SubKriteria::where(
-                                            'id_kriteria',
-                                            $kriteria->id,
-                                        )->count();
-                                    @endphp
-                                    <li
-                                        class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                                <i class="ni ni-archive-2 text-white opacity-10"></i>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{ $kriteria->kriteria }}</h6>
-                                                <span class="text-xs">{{ $sub_kriteria }} Sub Kriteria</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
+            </div>
+
+            <!-- Kriteria Kelulusan -->
+            <div class="lg:col-span-3">
+                <div class="card bg-base-100 shadow-md rounded-2xl">
+                    <div class="card-body p-6">
+                        <h3 class="text-base font-bold text-base-content mb-4">
+                            Kriteria Kelulusan Pelatihan
+                        </h3>
+                        <div class="space-y-3">
+                            @foreach ($kriteria_bobot as $kriteria)
+                                @php
+                                    $sub_kriteria = App\Models\SubKriteria::where('id_kriteria', $kriteria->id)->count();
+                                @endphp
+                                <div class="flex items-center gap-4 p-3 rounded-xl bg-base-200 hover:bg-base-300 transition-colors duration-200">
+                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa fa-list-check text-primary text-sm"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-sm font-semibold text-base-content truncate">{{ $kriteria->kriteria }}</h4>
+                                        <p class="text-xs text-base-content/50">{{ $sub_kriteria }} Sub Kriteria</p>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 @endsection
+
+
+
+

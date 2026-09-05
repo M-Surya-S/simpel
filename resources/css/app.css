@@ -13,7 +13,7 @@
 @layer components {
     /* Sidebar / Drawer Styles */
     .sidebar-menu .menu-item a {
-        @apply rounded-lg transition-all duration-200 ease-in-out relative font-medium text-base-content/70;
+        @apply rounded-lg transition-all duration-200 ease-in-out relative font-medium text-base-content/70 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none py-[10px] px-6;
     }
     .sidebar-menu .menu-item a:hover {
         @apply bg-base-200 text-base-content;
@@ -21,7 +21,7 @@
     
     /* Active State matching reference image */
     .sidebar-menu .menu-item a.active {
-        @apply bg-primary/10 text-primary font-bold shadow-none rounded-r-lg rounded-l-none;
+        @apply bg-primary/10 text-primary font-bold shadow-none rounded-r-full rounded-l-none;
     }
     
     .sidebar-menu .menu-item a.active::before {
@@ -38,10 +38,7 @@
         transform: translateY(-2px);
     }
 
-    /* Clean up the page header - no background, just padding */
-    .page-header {
-        @apply px-6 py-5 bg-transparent;
-    }
+
 
     /* Breadcrumb links */
     .breadcrumb-link {

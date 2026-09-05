@@ -3,93 +3,81 @@
 @section('title', 'Edit Kriteria dan Bobot')
 
 @section('main')
-    <main class="main-content position-relative border-radius-lg ">
-        <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
-            data-scroll="false">
-            <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm">
-                            <a class="opacity-5 text-white" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="breadcrumb-item text-sm">
-                            <a class="opacity-5 text-white" href="{{ route('kriteria-bobot') }}">Kriteria dan Bobot</a>
-                        </li>
-                    </ol>
-                    <h4 class="font-weight-bolder text-white mb-0">Edit</h4>
-                </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    </div>
-                    <ul class="navbar-nav  justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link text-white font-weight-bold px-0">
-                                <span class="d-sm-inline d-none">SCPK Kelompok Konversi</span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                </div>
-                            </a>
-                        </li>
+    <!-- Page Header -->
+    <div class="px-6 py-6 pb-2">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="text-sm breadcrumbs text-primary-content/70 mb-1">
+                    <ul>
+                        <li><a href="{{ route('home') }}" class="breadcrumb-link"><i class="fa fa-home text-xs"></i></a></li>
+                        <li><a href="{{ route('kriteria-bobot') }}" class="breadcrumb-link">Kriteria dan Bobot</a></li>
+                        <li>Edit</li>
                     </ul>
                 </div>
+                <h1 class="text-2xl font-bold text-primary-content">Edit Kriteria dan Bobot</h1>
             </div>
-        </nav>
-        <!-- End Navbar -->
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <form action="{{ route('update-kriteria-bobot', $kriteria_bobot->id) }}" method="POST">
-                        @method('PUT')
-                        @csrf
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Kriteria</label>
-                                            <input class="form-control" type="text" name="kriteria"
-                                                value="{{ $kriteria_bobot->kriteria }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Bobot</label>
-                                            <input class="form-control" type="number" name="bobot"
-                                                value="{{ $kriteria_bobot->bobot }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tipe" class="form-control-label">Tipe</label>
-                                            <select class="form-control" id="tipe" name="tipe" required>
-                                                <option disabled {{ $kriteria_bobot->tipe ? '' : 'selected' }}>
-                                                    -- Pilih Tipe --
-                                                </option>
-                                                <option value="benefit"
-                                                    {{ $kriteria_bobot->tipe == 'benefit' ? 'selected' : '' }}>Benefit
-                                                </option>
-                                                <option value="cost"
-                                                    {{ $kriteria_bobot->tipe == 'cost' ? 'selected' : '' }}>Cost
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 text-end mt-3">
-                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="flex items-center gap-2">
+                <label for="sidebar-drawer" class="btn btn-ghost btn-sm text-primary-content lg:hidden">
+                    <i class="fa fa-bars"></i>
+                </label>
             </div>
         </div>
-    </main>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 flex-1">
+        <div class="max-w-2xl mx-auto">
+            <form action="{{ route('update-kriteria-bobot', $kriteria_bobot->id) }}" method="POST">
+                @method('PUT')
+                @csrf
+                <div class="card bg-base-100 shadow-md rounded-2xl">
+                    <div class="card-body">
+                        <h3 class="text-base font-bold text-base-content mb-4 flex items-center gap-2">
+                            <i class="fa fa-edit text-warning text-sm"></i>
+                            Edit Kriteria
+                        </h3>
+
+                        <div class="form-control w-full mb-4">
+                            <label class="label">
+                                <span class="label-text font-semibold">Kriteria</span>
+                            </label>
+                            <input type="text" name="kriteria" value="{{ $kriteria_bobot->kriteria }}"
+                                class="input input-bordered w-full" required />
+                        </div>
+
+                        <div class="form-control w-full mb-4">
+                            <label class="label">
+                                <span class="label-text font-semibold">Bobot</span>
+                            </label>
+                            <input type="number" name="bobot" value="{{ $kriteria_bobot->bobot }}"
+                                class="input input-bordered w-full" required />
+                        </div>
+
+                        <div class="form-control w-full mb-6">
+                            <label class="label">
+                                <span class="label-text font-semibold">Tipe</span>
+                            </label>
+                            <select name="tipe" class="select select-bordered w-full" required>
+                                <option disabled {{ $kriteria_bobot->tipe ? '' : 'selected' }}>-- Pilih Tipe --</option>
+                                <option value="benefit" {{ $kriteria_bobot->tipe == 'benefit' ? 'selected' : '' }}>Benefit</option>
+                                <option value="cost" {{ $kriteria_bobot->tipe == 'cost' ? 'selected' : '' }}>Cost</option>
+                            </select>
+                        </div>
+
+                        <div class="flex justify-end gap-2">
+                            <a href="{{ route('kriteria-bobot') }}" class="btn btn-ghost btn-sm">Batal</a>
+                            <button type="submit" class="btn btn-primary btn-sm gap-1">
+                                <i class="fa fa-save text-xs"></i>
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
+
+
+
+
