@@ -1,3 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+}
+
+@layer components {
+    /* Sidebar / Drawer Styles */
+    .sidebar-menu .menu-item a {
+        @apply rounded-lg transition-all duration-200 ease-in-out relative font-medium text-base-content/70;
+    }
+    .sidebar-menu .menu-item a:hover {
+        @apply bg-base-200 text-base-content;
+    }
+    
+    /* Active State matching reference image */
+    .sidebar-menu .menu-item a.active {
+        @apply bg-primary/10 text-primary font-bold shadow-none rounded-r-lg rounded-l-none;
+    }
+    
+    .sidebar-menu .menu-item a.active::before {
+        content: '';
+        @apply absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md;
+    }
+
+    /* Card hover animation */
+    .card-hover {
+        @apply transition-transform duration-300 ease-in-out border border-base-300/30;
+    }
+    .card-hover:hover {
+        @apply shadow-xl;
+        transform: translateY(-2px);
+    }
+
+    /* Clean up the page header - no background, just padding */
+    .page-header {
+        @apply px-6 py-5 bg-transparent;
+    }
+
+    /* Breadcrumb links */
+    .breadcrumb-link {
+        @apply hover:text-primary transition-colors duration-200;
+    }
+
+    /* Custom Input Styles */
+    .input:focus, .select:focus {
+        @apply border-primary ring-1 ring-primary/30 outline-none;
+    }
+    
+    /* Smooth transition for theme colors */
+    * {
+        @apply transition-colors duration-200;
+    }
+}
