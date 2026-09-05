@@ -27,7 +27,15 @@ class Dashboard extends Controller
                 $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
                 $rate = $skor->sub_kriteria->rate;
 
-                $nilai_s *= pow($rate, ($k->bobot / $kriteria->sum('bobot')));
+                $bobot_relatif = $k->bobot / $kriteria->sum('bobot');
+                
+                if (strtolower($k->tipe) === 'cost') {
+                    // Invers nilai rate untuk cost (karena di seeder rate 5 = terdekat/terbaik)
+                    $nilai_hitungan = 6 - $rate; 
+                    $nilai_s *= pow($nilai_hitungan, -$bobot_relatif);
+                } else {
+                    $nilai_s *= pow($rate, $bobot_relatif);
+                }
             }
 
             $vektor_s[$a->id] = $nilai_s;
@@ -39,14 +47,6 @@ class Dashboard extends Controller
         foreach ($vektor_s as $id => $s) {
             $vektor_v[$id] = $s / $total_s;
         }
-
-        arsort($vektor_v);
-
-        $top_5_ids = array_slice(array_keys($vektor_v), 0, 5);
-
-        $sorted_alternatif = collect($top_5_ids)->map(function ($id) use ($alternatif) {
-            return $alternatif->firstWhere('id', $id);
-        });
 
         foreach ($alternatif as $a) {
             $status = 'Lulus';
@@ -69,7 +69,16 @@ class Dashboard extends Controller
             }
 
             $a->status = $status;
+            $a->nilai_v = $vektor_v[$a->id];
         }
+
+        // Urutkan berdasarkan Status (Lulus di atas) lalu nilai V (descending)
+        $sorted_alternatif = $alternatif->sort(function ($a, $b) {
+            if ($a->status === $b->status) {
+                return $b->nilai_v <=> $a->nilai_v;
+            }
+            return $a->status === 'Lulus' ? -1 : 1;
+        })->values()->take(5);
 
         return view('dashboard', compact('kriteria_bobot', 'jumlah_kriteria', 'jumlah_sub_kriteria', 'jumlah_alternatif', 'sorted_alternatif', 'vektor_v'));
     }

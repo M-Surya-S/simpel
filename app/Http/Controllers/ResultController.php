@@ -23,7 +23,15 @@ class ResultController extends Controller
                 $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
                 $rate = $skor->sub_kriteria->rate;
 
-                $nilai_s *= pow($rate, ($k->bobot / $kriteria->sum('bobot')));
+                $bobot_relatif = $k->bobot / $kriteria->sum('bobot');
+                
+                if (strtolower($k->tipe) === 'cost') {
+                    // Invers nilai rate untuk cost (karena di seeder rate 5 = terdekat/terbaik)
+                    $nilai_hitungan = 6 - $rate; 
+                    $nilai_s *= pow($nilai_hitungan, -$bobot_relatif);
+                } else {
+                    $nilai_s *= pow($rate, $bobot_relatif);
+                }
             }
 
             $vektor_s[$a->id] = $nilai_s;
@@ -77,7 +85,15 @@ class ResultController extends Controller
                 $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
                 $rate = $skor->sub_kriteria->rate;
 
-                $nilai_s *= pow($rate, ($k->bobot / $kriteria->sum('bobot')));
+                $bobot_relatif = $k->bobot / $kriteria->sum('bobot');
+                
+                if (strtolower($k->tipe) === 'cost') {
+                    // Invers nilai rate untuk cost (karena di seeder rate 5 = terdekat/terbaik)
+                    $nilai_hitungan = 6 - $rate; 
+                    $nilai_s *= pow($nilai_hitungan, -$bobot_relatif);
+                } else {
+                    $nilai_s *= pow($rate, $bobot_relatif);
+                }
             }
 
             $vektor_s[$a->id] = $nilai_s;
@@ -89,12 +105,6 @@ class ResultController extends Controller
         foreach ($vektor_s as $id => $s) {
             $vektor_v[$id] = $s / $total_s;
         }
-
-        arsort($vektor_v);
-
-        $sorted_alternatif = collect($vektor_v)->keys()->map(function ($id) use ($alternatif) {
-            return $alternatif->firstWhere('id', $id);
-        });
 
         foreach ($alternatif as $a) {
             $status = 'Lulus';
@@ -117,10 +127,24 @@ class ResultController extends Controller
             }
 
             $a->status = $status;
+            $a->nilai_v = $vektor_v[$a->id];
         }
 
+        $sorted_alternatif = $alternatif->sort(function ($a, $b) {
+            // Jika statusnya sama, urutkan berdasarkan nilai V (descending)
+            if ($a->status === $b->status) {
+                return $b->nilai_v <=> $a->nilai_v;
+            }
+            // Jika beda, Lulus di atas Tidak Lulus
+            return $a->status === 'Lulus' ? -1 : 1;
+        })->values();
+
+        $alternatif_lulus = $sorted_alternatif->where('status', 'Lulus')->values();
+        $alternatif_tidak_lulus = $sorted_alternatif->where('status', 'Tidak Lulus')->values();
+
         return view('result.ranking', [
-            'alternatif' => $sorted_alternatif,
+            'alternatif_lulus' => $alternatif_lulus,
+            'alternatif_tidak_lulus' => $alternatif_tidak_lulus,
             'vektor_v' => $vektor_v,
         ]);
     }
